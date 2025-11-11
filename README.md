@@ -10,6 +10,8 @@ Instant-search React application for exploring anime via the free [Jikan](https:
 - 🔍 Fully typed API models for search and detail endpoints (`src/api/types/anime.ts`)
 - 🧭 React Router detail page with scores, genres, studios, trailers, and metadata callouts
 - 🎨 Responsive Tailwind UI with skeleton loaders, empty states, and friendly error messaging
+- 🌗 Persistent light/dark mode toggle backed by a custom ThemeProvider
+- 🌀 Delightful page/card animations powered by GSAP
 
 ## Tech Stack
 
@@ -38,12 +40,23 @@ src/
   app/
     store.ts             # Redux store configuration
     hooks.ts             # Typed hooks for useDispatch/useSelector
-  components/            # Reusable UI (search bar, cards, pagination, layout)
-  features/search/       # Redux slice controlling query/page/pageSize
-  hooks/useDebouncedValue.ts
-  pages/                 # Search + Anime detail routes
+  assets/
+    style.css            # Tailwind + global theming rules
+  components/
+    AnimeCard.tsx, Pagination.tsx, SearchBar.tsx, Layout.tsx, ThemeToggle.tsx, etc.
+  context/
+    ThemeContext.tsx     # Light/dark provider with localStorage persistence
+  features/
+    search/
+      searchSlice.ts     # Redux slice for query/page/pageSize
+  hooks/
+    api/                 # React Query hooks (useAnimeSearchQuery, useAnimeDetailQuery)
+    common/              # Shared hooks (useDebouncedValue, useTheme)
+    pages/               # Page orchestrators (useSearchPage, useAnimeDetailPage)
+  pages/
+    SearchPage.tsx, AnimeDetailPage.tsx
   App.tsx                # Router + layout shell
-  main.tsx               # Entry with Redux + React Query providers
+  main.tsx               # Entry with Theme/Redux/React Query providers
 ```
 
 ## Bonus Implementation
@@ -51,6 +64,8 @@ src/
 - Skeleton loaders during fetches
 - Friendly empty/search onboarding states
 - External link to the official Jikan documentation from the header
+- GSAP-driven hero/card/detail animations
+- Theme toggle with local preference storage
 
 ## Deployment
 
